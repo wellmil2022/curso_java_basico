@@ -1,65 +1,64 @@
 package section14_exceptions.reservation;
 
+/**
+ * this Solution for App Reservations
+ * Is very bad because the all logic
+ * is not in class reservation and
+ * don't set try catch for excetions
+ */
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
 import section14_exceptions.reservation.model.entities.Reservation;
 
 public class AppSolutionVeryBad {
 
 	public static void main(String[] args) throws ParseException {
 		Scanner sc = new Scanner(System.in);
-		//List<Reservation> reservas = new ArrayList<Reservation>();
-		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-		Reservation res = null;
-		
-	
+		// List<Reservation> reservas = new ArrayList<Reservation>();
+		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+		Reservation reservation = null;
+
 		System.out.println("Enter the reservation:");
 		System.out.println("Room number:");
 		Integer roomNumber = sc.nextInt();
 		sc.nextLine();
-		//check-in
+		// check-in
 		System.out.println("Check-in date (dd/MM/yyyy");
-		Date checkin = fmt.parse(sc.nextLine());
+		Date checkin = formatDate.parse(sc.nextLine());
 
-		
 		System.out.println("Check-out date (dd/MM/yyyy");
-		Date checkout = fmt.parse(sc.nextLine());
+		Date checkout = formatDate.parse(sc.nextLine());
 
-		//teste com after
-		
-		
-		
+		// test with after method of class Date
+
 		if (!checkout.after(checkin)) {
 			System.out.println("Error: date checkout cannot be before checkin ");
 		} else {
-			res = new Reservation(roomNumber, checkin, checkout);
+			reservation = new Reservation(roomNumber, checkin, checkout);
 		}
-		
-		// update
-		
+
+		// update reservation
+
 		System.out.println("Enter data to update:");
 		System.out.println("Check-in date (dd/MM/yyyy");
-		checkin = fmt.parse(sc.nextLine());
+		checkin = formatDate.parse(sc.nextLine());
 
 		System.out.println("Check-out date (dd/MM/yyyy");
-		checkout = fmt.parse(sc.nextLine());
+		checkout = formatDate.parse(sc.nextLine());
 
-		
-		//lógica para datas futuras
+		// only allow future dates 
 		Date now = new Date();
-		
+
 		if (checkin.after(now) && checkout.after(checkin)) {
-			res.updateDates(checkin, checkout);
+			reservation.updateDates(checkin, checkout);
 		} else {
-			System.out.println("Only futures dates must can be update");
+			System.out.println("Error in Reservation: Only futures dates must can be update");
 		}
-		
-		
-		System.out.println(res);
-		
+
+		if (reservation != null) System.out.println(reservation);
+
 		sc.close();
 
 	}

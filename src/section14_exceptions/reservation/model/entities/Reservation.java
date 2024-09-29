@@ -41,17 +41,7 @@ public class Reservation {
 		this.checkout = checkout;
 	}
 
-	@Override
-	public String toString() {
 		
-		
-		return String.format("Reservation: Room %s, Check-in: %s, Check-out:%s, %d nights",
-				roomNumber,
-				fmt.format(checkin),
-				fmt.format(checkout),
-				duration());
-	}
-	
 	public Integer duration() {
 		// diferença em milisegundos
 		Long diff = this.checkout.getTime() - this.checkin.getTime();
@@ -66,6 +56,18 @@ public class Reservation {
 		this.checkout = checkout;
 		
 		
+	}
+	
+	@Override
+	public String toString() {
+		
+		
+		return String.format("Reservation: "
+				+ "Room %s, Check-in: %s, Check-out:%s, %d nights",
+				roomNumber,
+				fmt.format(checkin),
+				fmt.format(checkout),
+				duration());
 	}
 
 }

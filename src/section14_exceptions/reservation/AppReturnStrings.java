@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import section14_exceptions.reservation.model.entities.Reservation;
 
-public class Application {
+public class AppReturnStrings {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
