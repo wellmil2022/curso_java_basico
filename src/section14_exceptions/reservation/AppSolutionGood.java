@@ -7,8 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
 import section14_exceptions.reservation.model.entities.Reservation;
+import section14_exceptions.reservation.model.exceptions.DomainException;
 
 public class AppSolutionGood {
 
@@ -28,6 +28,7 @@ public class AppSolutionGood {
 		System.out.println(reservation);
 		
 		// update
+		sc.nextLine();
 		System.out.println("Enter data to update:");
 		System.out.println("Check-in date (dd/MM/yyyy");
 		checkin = formatDate.parse(sc.next());
@@ -35,10 +36,13 @@ public class AppSolutionGood {
 		checkout = formatDate.parse(sc.next());
 		reservation.updateDates(checkin, checkout);
 		System.out.println(reservation);
+		
 		} catch (ParseException e) {
 			System.out.println("Invalid date format");
-		} catch (IllegalArgumentException e) {
+		} catch (DomainException e) {
 			System.out.println("Error in reservation:" + e.getMessage());
+		} catch (RuntimeException e) {
+			System.out.println("Unexpected error");
 		}
 		sc.close();
 

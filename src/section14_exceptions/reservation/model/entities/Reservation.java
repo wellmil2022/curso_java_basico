@@ -3,6 +3,7 @@ package section14_exceptions.reservation.model.entities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import section14_exceptions.reservation.model.exceptions.DomainException;
 
 public class Reservation {
 	private Integer roomNumber;
@@ -10,8 +11,14 @@ public class Reservation {
 	private Date checkout;
 	private static SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public Reservation(Integer roomNumber, Date checkin, Date checkout) {
-		super();
+	public Reservation(Integer roomNumber, Date checkin, Date checkout) throws DomainException {
+		Date now = new Date();
+		if (checkin.before(now) || checkout.before(now)) {
+			throw new DomainException("Reservation dates for update must been future dates ");
+		}
+		if (!checkout.after(checkin)) {
+			throw new DomainException("Checkout date must been after checkin date");
+		}
 		this.roomNumber = roomNumber;
 		this.checkin = checkin;
 		this.checkout = checkout;
@@ -68,14 +75,14 @@ public class Reservation {
 		
 	}
 
-	public void updateDates(Date checkin, Date checkout) {
+	public void updateDates(Date checkin, Date checkout) throws DomainException {
 		//tests - future dates and checkout after 
 		Date now = new Date();
 		if (checkin.before(now) || checkout.before(now)) {
-			throw new IllegalArgumentException("Reservation dates for update must been future dates ");
+			throw new DomainException("Reservation dates for update must been future dates ");
 		} 
 		if (!checkout.after(checkin)) {
-			throw new IllegalArgumentException("Checkout date must been after checkin date");
+			throw new DomainException("Checkout date must been after checkin date");
 		}
 		// if pass in test then update
 		this.checkin = checkin;
