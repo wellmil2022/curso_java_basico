@@ -1,4 +1,8 @@
 package section14_exceptions.reservation;
+/**
+ * Solution bad, because the erros return
+ * strings that inform only
+ */
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,14 +11,12 @@ import java.util.Scanner;
 
 import section14_exceptions.reservation.model.entities.Reservation;
 
-public class AppReturnStrings {
+public class AppSolutionGood {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		//List<Reservation> reservas = new ArrayList<Reservation>();
 		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 		
-	
 		System.out.println("Enter the reservation:");
 		System.out.println("Room number:");
 		Integer roomNumber = sc.nextInt();
@@ -37,6 +39,7 @@ public class AppReturnStrings {
 		}
 		Reservation res = new Reservation(roomNumber, checkin, checkout);
 		System.out.println(res);
+		
 		// update
 		System.out.println("Enter data to update:");
 		System.out.println("Check-in date (dd/MM/yyyy");
