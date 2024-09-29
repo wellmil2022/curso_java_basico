@@ -1,4 +1,4 @@
-package section14_exceptions.model.entities;
+package section14_exceptions.reservation.model.entities;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

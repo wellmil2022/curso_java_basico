@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-import section14_exceptions.model.entities.Reservation;
+import section14_exceptions.reservation.model.entities.Reservation;
 
 public class Application {
 
