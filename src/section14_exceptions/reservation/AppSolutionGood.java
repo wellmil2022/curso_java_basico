@@ -1,7 +1,6 @@
 package section14_exceptions.reservation;
 /**
- * Solution bad, because the erros return
- * strings that inform only
+ * Solution good, because we makes exception treatment
  */
 
 import java.text.ParseException;
@@ -15,49 +14,32 @@ public class AppSolutionGood {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		
+		try {
 		System.out.println("Enter the reservation:");
 		System.out.println("Room number:");
 		Integer roomNumber = sc.nextInt();
-		sc.nextLine();
-		//check-in
 		System.out.println("Check-in date (dd/MM/yyyy");
-		Date checkin = null;
-		try {
-			checkin = fmt.parse(sc.nextLine());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
+		Date checkin = formatDate.parse(sc.next());
 		System.out.println("Check-out date (dd/MM/yyyy");
-		Date checkout = null;
-		try {
-			checkout = fmt.parse(sc.nextLine());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		Reservation res = new Reservation(roomNumber, checkin, checkout);
-		System.out.println(res);
+		Date checkout = formatDate.parse(sc.next());
+		Reservation reservation = new Reservation(roomNumber, checkin, checkout);
+		System.out.println(reservation);
 		
 		// update
 		System.out.println("Enter data to update:");
 		System.out.println("Check-in date (dd/MM/yyyy");
-		try {
-			res.setCheckin(fmt.parse(sc.nextLine()));
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		//sc.nextLine();
+		checkin = formatDate.parse(sc.next());
 		System.out.println("Check-out date (dd/MM/yyyy");
-		try {
-			res.setCheckout(fmt.parse(sc.nextLine()));
+		checkout = formatDate.parse(sc.next());
+		reservation.updateDates(checkin, checkout);
+		System.out.println(reservation);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			System.out.println("Invalid date format");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Error in reservation:" + e.getMessage());
 		}
-		System.out.println(res);
-		
 		sc.close();
 
 	}

@@ -46,7 +46,7 @@ public class AppSolutionBad {
 		System.out.println("Check-out date (dd/MM/yyyy");
 		checkout = formatDate.parse(sc.nextLine());
 		
-		String error = reservation.updateDates(checkin, checkout);
+		String error = reservation.updateDatesString(checkin, checkout);
 		if (error == null) {
 			reservation = new Reservation(roomNumber, checkin, checkout);
 		} else {

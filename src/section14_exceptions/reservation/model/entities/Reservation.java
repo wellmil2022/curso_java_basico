@@ -51,7 +51,7 @@ public class Reservation {
 		return durationLong.intValue();
 	}
 	
-	public String updateDates(Date checkin, Date checkout) {
+	public String updateDatesString(Date checkin, Date checkout) {
 		//tests - future dates and checkout after 
 		Date now = new Date();
 		if (checkin.before(now) || checkout.before(now)) {
@@ -67,6 +67,24 @@ public class Reservation {
 		return null;
 		
 	}
+
+	public void updateDates(Date checkin, Date checkout) {
+		//tests - future dates and checkout after 
+		Date now = new Date();
+		if (checkin.before(now) || checkout.before(now)) {
+			throw new IllegalArgumentException("Reservation dates for update must been future dates ");
+		} 
+		if (!checkout.after(checkin)) {
+			throw new IllegalArgumentException("Checkout date must been after checkin date");
+		}
+		// if pass in test then update
+		this.checkin = checkin;
+		this.checkout = checkout;
+		
+	}
+	
+	
+	
 	
 	@Override
 	public String toString() {
