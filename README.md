@@ -1,8 +1,6 @@
 # Curso Java Básico
 Curso Java COMPLETO Programação Orientada a Objetos + Projetos (Udemy)
 
-
-
 ## Controle
 
 - [x]  **Seção 1** - Introdução
